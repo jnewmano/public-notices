@@ -3,6 +3,7 @@ package checker
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"io"
 	"io/ioutil"
 
@@ -25,6 +26,7 @@ func New(processors ...Processor) (*Checker, error) {
 
 func (c *Checker) Do(ctx context.Context, url string, lastTag string) (string, error) {
 
+	fmt.Println("Checking document", url)
 	info, err := download.Head(ctx, url)
 	if err != nil {
 		return "", err
@@ -37,6 +39,7 @@ func (c *Checker) Do(ctx context.Context, url string, lastTag string) (string, e
 		return tag, nil
 	}
 
+	fmt.Println("Downloading document", url)
 	r, err := download.Download(ctx, url)
 	if err != nil {
 		return "", err
@@ -45,7 +48,9 @@ func (c *Checker) Do(ctx context.Context, url string, lastTag string) (string, e
 
 	name := url + "#" + tag
 
-	for _, v := range c.Processors {
+	fmt.Println("Running processors")
+	for i, v := range c.Processors {
+		fmt.Println("Processor", i)
 		buff := bytes.NewBuffer(nil)
 
 		r2 := io.TeeReader(r, buff)
@@ -53,7 +58,7 @@ func (c *Checker) Do(ctx context.Context, url string, lastTag string) (string, e
 		err := v(ctx, name, r2)
 		if err != nil {
 			// TODO: it's not great to abandon the entire pipeline if one stage fails
-			return "", err
+			return "", fmt.Errorf("processor error [%d] [%s]", i, err)
 		}
 
 		r = ioutil.NopCloser(buff)

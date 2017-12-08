@@ -2,15 +2,17 @@ package tokenize
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"testing"
 )
 
 func TestTokenize(t *testing.T) {
+	ctx := context.Background()
 
 	r := bytes.NewBuffer([]byte(sampleText))
 
-	tokens, err := Tokenize(r)
+	tokens, err := Tokenize(ctx, r)
 	if err != nil {
 		t.Fatalf("unable to split sample text: %s\n", err)
 	}

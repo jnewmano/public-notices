@@ -1,0 +1,565 @@
+{
+  "sentences": [
+    {
+      "text": {
+        "content": "Public hearing and recommendation of Patterson Construction’s request for a zone change on 0.32-acres of property located at 845 North 500 West changing the zoning from an A-1 to an R-2 zone."
+      }
+    }
+  ],
+  "tokens": [
+    {
+      "text": {
+        "content": "Public"
+      },
+      "part_of_speech": {
+        "tag": 1,
+        "number": 1
+      },
+      "dependency_edge": {
+        "head_token_index": 1,
+        "label": 5
+      },
+      "lemma": "Public"
+    },
+    {
+      "text": {
+        "content": "hearing",
+        "begin_offset": 7
+      },
+      "part_of_speech": {
+        "tag": 6,
+        "number": 1
+      },
+      "dependency_edge": {
+        "head_token_index": 1,
+        "label": 54
+      },
+      "lemma": "hearing"
+    },
+    {
+      "text": {
+        "content": "and",
+        "begin_offset": 15
+      },
+      "part_of_speech": {
+        "tag": 4
+      },
+      "dependency_edge": {
+        "head_token_index": 1,
+        "label": 10
+      },
+      "lemma": "and"
+    },
+    {
+      "text": {
+        "content": "recommendation",
+        "begin_offset": 19
+      },
+      "part_of_speech": {
+        "tag": 6,
+        "number": 1
+      },
+      "dependency_edge": {
+        "head_token_index": 1,
+        "label": 12
+      },
+      "lemma": "recommendation"
+    },
+    {
+      "text": {
+        "content": "of",
+        "begin_offset": 34
+      },
+      "part_of_speech": {
+        "tag": 2
+      },
+      "dependency_edge": {
+        "head_token_index": 1,
+        "label": 43
+      },
+      "lemma": "of"
+    },
+    {
+      "text": {
+        "content": "Patterson",
+        "begin_offset": 37
+      },
+      "part_of_speech": {
+        "tag": 6,
+        "number": 1,
+        "proper": 1
+      },
+      "dependency_edge": {
+        "head_token_index": 6,
+        "label": 26
+      },
+      "lemma": "Patterson"
+    },
+    {
+      "text": {
+        "content": "Construction",
+        "begin_offset": 47
+      },
+      "part_of_speech": {
+        "tag": 6,
+        "number": 1,
+        "proper": 1
+      },
+      "dependency_edge": {
+        "head_token_index": 8,
+        "label": 37
+      },
+      "lemma": "Construction"
+    },
+    {
+      "text": {
+        "content": "’s",
+        "begin_offset": 59
+      },
+      "part_of_speech": {
+        "tag": 9
+      },
+      "dependency_edge": {
+        "head_token_index": 6,
+        "label": 46
+      },
+      "lemma": "’s"
+    },
+    {
+      "text": {
+        "content": "request",
+        "begin_offset": 64
+      },
+      "part_of_speech": {
+        "tag": 6,
+        "number": 1
+      },
+      "dependency_edge": {
+        "head_token_index": 4,
+        "label": 36
+      },
+      "lemma": "request"
+    },
+    {
+      "text": {
+        "content": "for",
+        "begin_offset": 72
+      },
+      "part_of_speech": {
+        "tag": 2
+      },
+      "dependency_edge": {
+        "head_token_index": 8,
+        "label": 43
+      },
+      "lemma": "for"
+    },
+    {
+      "text": {
+        "content": "a",
+        "begin_offset": 76
+      },
+      "part_of_speech": {
+        "tag": 5
+      },
+      "dependency_edge": {
+        "head_token_index": 12,
+        "label": 16
+      },
+      "lemma": "a"
+    },
+    {
+      "text": {
+        "content": "zone",
+        "begin_offset": 78
+      },
+      "part_of_speech": {
+        "tag": 6,
+        "number": 1
+      },
+      "dependency_edge": {
+        "head_token_index": 12,
+        "label": 26
+      },
+      "lemma": "zone"
+    },
+    {
+      "text": {
+        "content": "change",
+        "begin_offset": 83
+      },
+      "part_of_speech": {
+        "tag": 6,
+        "number": 1
+      },
+      "dependency_edge": {
+        "head_token_index": 9,
+        "label": 36
+      },
+      "lemma": "change"
+    },
+    {
+      "text": {
+        "content": "on",
+        "begin_offset": 90
+      },
+      "part_of_speech": {
+        "tag": 2
+      },
+      "dependency_edge": {
+        "head_token_index": 12,
+        "label": 43
+      },
+      "lemma": "on"
+    },
+    {
+      "text": {
+        "content": "0.32",
+        "begin_offset": 93
+      },
+      "part_of_speech": {
+        "tag": 7
+      },
+      "dependency_edge": {
+        "head_token_index": 16,
+        "label": 30
+      },
+      "lemma": "0.32"
+    },
+    {
+      "text": {
+        "content": "-",
+        "begin_offset": 97
+      },
+      "part_of_speech": {
+        "tag": 10
+      },
+      "dependency_edge": {
+        "head_token_index": 16,
+        "label": 32
+      },
+      "lemma": "-"
+    },
+    {
+      "text": {
+        "content": "acres",
+        "begin_offset": 98
+      },
+      "part_of_speech": {
+        "tag": 6,
+        "number": 1
+      },
+      "dependency_edge": {
+        "head_token_index": 13,
+        "label": 36
+      },
+      "lemma": "acre"
+    },
+    {
+      "text": {
+        "content": "of",
+        "begin_offset": 104
+      },
+      "part_of_speech": {
+        "tag": 2
+      },
+      "dependency_edge": {
+        "head_token_index": 16,
+        "label": 43
+      },
+      "lemma": "of"
+    },
+    {
+      "text": {
+        "content": "property",
+        "begin_offset": 107
+      },
+      "part_of_speech": {
+        "tag": 6,
+        "number": 1
+      },
+      "dependency_edge": {
+        "head_token_index": 17,
+        "label": 36
+      },
+      "lemma": "property"
+    },
+    {
+      "text": {
+        "content": "located",
+        "begin_offset": 116
+      },
+      "part_of_speech": {
+        "tag": 11,
+        "tense": 3
+      },
+      "dependency_edge": {
+        "head_token_index": 16,
+        "label": 59
+      },
+      "lemma": "locate"
+    },
+    {
+      "text": {
+        "content": "at",
+        "begin_offset": 124
+      },
+      "part_of_speech": {
+        "tag": 2
+      },
+      "dependency_edge": {
+        "head_token_index": 19,
+        "label": 43
+      },
+      "lemma": "at"
+    },
+    {
+      "text": {
+        "content": "845",
+        "begin_offset": 127
+      },
+      "part_of_speech": {
+        "tag": 7
+      },
+      "dependency_edge": {
+        "head_token_index": 24,
+        "label": 30
+      },
+      "lemma": "845"
+    },
+    {
+      "text": {
+        "content": "North",
+        "begin_offset": 131
+      },
+      "part_of_speech": {
+        "tag": 6,
+        "number": 1,
+        "proper": 1
+      },
+      "dependency_edge": {
+        "head_token_index": 24,
+        "label": 26
+      },
+      "lemma": "North"
+    },
+    {
+      "text": {
+        "content": "500",
+        "begin_offset": 137
+      },
+      "part_of_speech": {
+        "tag": 7
+      },
+      "dependency_edge": {
+        "head_token_index": 22,
+        "label": 30
+      },
+      "lemma": "500"
+    },
+    {
+      "text": {
+        "content": "West",
+        "begin_offset": 141
+      },
+      "part_of_speech": {
+        "tag": 6,
+        "number": 1,
+        "proper": 1
+      },
+      "dependency_edge": {
+        "head_token_index": 20,
+        "label": 36
+      },
+      "lemma": "West"
+    },
+    {
+      "text": {
+        "content": "changing",
+        "begin_offset": 146
+      },
+      "part_of_speech": {
+        "tag": 11
+      },
+      "dependency_edge": {
+        "head_token_index": 12,
+        "label": 59
+      },
+      "lemma": "change"
+    },
+    {
+      "text": {
+        "content": "the",
+        "begin_offset": 155
+      },
+      "part_of_speech": {
+        "tag": 5
+      },
+      "dependency_edge": {
+        "head_token_index": 27,
+        "label": 16
+      },
+      "lemma": "the"
+    },
+    {
+      "text": {
+        "content": "zoning",
+        "begin_offset": 159
+      },
+      "part_of_speech": {
+        "tag": 6,
+        "number": 1
+      },
+      "dependency_edge": {
+        "head_token_index": 25,
+        "label": 18
+      },
+      "lemma": "zoning"
+    },
+    {
+      "text": {
+        "content": "from",
+        "begin_offset": 166
+      },
+      "part_of_speech": {
+        "tag": 2
+      },
+      "dependency_edge": {
+        "head_token_index": 25,
+        "label": 43
+      },
+      "lemma": "from"
+    },
+    {
+      "text": {
+        "content": "an",
+        "begin_offset": 171
+      },
+      "part_of_speech": {
+        "tag": 5
+      },
+      "dependency_edge": {
+        "head_token_index": 30,
+        "label": 16
+      },
+      "lemma": "an"
+    },
+    {
+      "text": {
+        "content": "A-1",
+        "begin_offset": 174
+      },
+      "part_of_speech": {
+        "tag": 6,
+        "number": 1
+      },
+      "dependency_edge": {
+        "head_token_index": 28,
+        "label": 36
+      },
+      "lemma": "A-1"
+    },
+    {
+      "text": {
+        "content": "to",
+        "begin_offset": 178
+      },
+      "part_of_speech": {
+        "tag": 2
+      },
+      "dependency_edge": {
+        "head_token_index": 25,
+        "label": 43
+      },
+      "lemma": "to"
+    },
+    {
+      "text": {
+        "content": "an",
+        "begin_offset": 181
+      },
+      "part_of_speech": {
+        "tag": 5
+      },
+      "dependency_edge": {
+        "head_token_index": 36,
+        "label": 16
+      },
+      "lemma": "an"
+    },
+    {
+      "text": {
+        "content": "R",
+        "begin_offset": 184
+      },
+      "part_of_speech": {
+        "tag": 6,
+        "number": 1,
+        "proper": 1
+      },
+      "dependency_edge": {
+        "head_token_index": 36,
+        "label": 26
+      },
+      "lemma": "R"
+    },
+    {
+      "text": {
+        "content": "-",
+        "begin_offset": 185
+      },
+      "part_of_speech": {
+        "tag": 10
+      },
+      "dependency_edge": {
+        "head_token_index": 33,
+        "label": 32
+      },
+      "lemma": "-"
+    },
+    {
+      "text": {
+        "content": "2",
+        "begin_offset": 186
+      },
+      "part_of_speech": {
+        "tag": 7
+      },
+      "dependency_edge": {
+        "head_token_index": 33,
+        "label": 30
+      },
+      "lemma": "2"
+    },
+    {
+      "text": {
+        "content": "zone",
+        "begin_offset": 188
+      },
+      "part_of_speech": {
+        "tag": 6,
+        "number": 1
+      },
+      "dependency_edge": {
+        "head_token_index": 31,
+        "label": 36
+      },
+      "lemma": "zone"
+    },
+    {
+      "text": {
+        "content": ".",
+        "begin_offset": 192
+      },
+      "part_of_speech": {
+        "tag": 10
+      },
+      "dependency_edge": {
+        "head_token_index": 1,
+        "label": 32
+      },
+      "lemma": "."
+    }
+  ],
+  "language": "en"
+}

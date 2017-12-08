@@ -1,0 +1,159 @@
+&language.AnalyzeEntitiesResponse{
+    Entities: {
+        &language.Entity{
+            Name:     "hearing",
+            Type:     4,
+            Metadata: {},
+            Salience: 0.26370105147361755,
+            Mentions: {
+                &language.EntityMention{
+                    Text:      &language.TextSpan{Content:"hearing", BeginOffset:7},
+                    Type:      2,
+                    Sentiment: (*language.Sentiment)(nil),
+                },
+            },
+            Sentiment: (*language.Sentiment)(nil),
+        },
+        &language.Entity{
+            Name:     "recommendation",
+            Type:     7,
+            Metadata: {},
+            Salience: 0.26370105147361755,
+            Mentions: {
+                &language.EntityMention{
+                    Text:      &language.TextSpan{Content:"recommendation", BeginOffset:19},
+                    Type:      2,
+                    Sentiment: (*language.Sentiment)(nil),
+                },
+            },
+            Sentiment: (*language.Sentiment)(nil),
+        },
+        &language.Entity{
+            Name:     "request",
+            Type:     7,
+            Metadata: {},
+            Salience: 0.110570527613163,
+            Mentions: {
+                &language.EntityMention{
+                    Text:      &language.TextSpan{Content:"request", BeginOffset:64},
+                    Type:      2,
+                    Sentiment: (*language.Sentiment)(nil),
+                },
+            },
+            Sentiment: (*language.Sentiment)(nil),
+        },
+        &language.Entity{
+            Name:     "zone change",
+            Type:     4,
+            Metadata: {},
+            Salience: 0.07613515853881836,
+            Mentions: {
+                &language.EntityMention{
+                    Text:      &language.TextSpan{Content:"zone change", BeginOffset:78},
+                    Type:      2,
+                    Sentiment: (*language.Sentiment)(nil),
+                },
+            },
+            Sentiment: (*language.Sentiment)(nil),
+        },
+        &language.Entity{
+            Name:     "property",
+            Type:     7,
+            Metadata: {},
+            Salience: 0.07613515853881836,
+            Mentions: {
+                &language.EntityMention{
+                    Text:      &language.TextSpan{Content:"property", BeginOffset:107},
+                    Type:      2,
+                    Sentiment: (*language.Sentiment)(nil),
+                },
+            },
+            Sentiment: (*language.Sentiment)(nil),
+        },
+        &language.Entity{
+            Name:     "Patterson Construction",
+            Type:     2,
+            Metadata: {},
+            Salience: 0.06711458414793015,
+            Mentions: {
+                &language.EntityMention{
+                    Text:      &language.TextSpan{Content:"Patterson Construction", BeginOffset:37},
+                    Type:      1,
+                    Sentiment: (*language.Sentiment)(nil),
+                },
+            },
+            Sentiment: (*language.Sentiment)(nil),
+        },
+        &language.Entity{
+            Name:     "zone",
+            Type:     2,
+            Metadata: {},
+            Salience: 0.04198369383811951,
+            Mentions: {
+                &language.EntityMention{
+                    Text:      &language.TextSpan{Content:"zone", BeginOffset:188},
+                    Type:      2,
+                    Sentiment: (*language.Sentiment)(nil),
+                },
+            },
+            Sentiment: (*language.Sentiment)(nil),
+        },
+        &language.Entity{
+            Name:     "A-1",
+            Type:     7,
+            Metadata: {},
+            Salience: 0.03158572316169739,
+            Mentions: {
+                &language.EntityMention{
+                    Text:      &language.TextSpan{Content:"A-1", BeginOffset:174},
+                    Type:      1,
+                    Sentiment: (*language.Sentiment)(nil),
+                },
+            },
+            Sentiment: (*language.Sentiment)(nil),
+        },
+        &language.Entity{
+            Name:     "R-2",
+            Type:     3,
+            Metadata: {},
+            Salience: 0.03158572316169739,
+            Mentions: {
+                &language.EntityMention{
+                    Text:      &language.TextSpan{Content:"R-2", BeginOffset:184},
+                    Type:      1,
+                    Sentiment: (*language.Sentiment)(nil),
+                },
+            },
+            Sentiment: (*language.Sentiment)(nil),
+        },
+        &language.Entity{
+            Name:     "zoning",
+            Type:     7,
+            Metadata: {},
+            Salience: 0.023504329845309258,
+            Mentions: {
+                &language.EntityMention{
+                    Text:      &language.TextSpan{Content:"zoning", BeginOffset:159},
+                    Type:      2,
+                    Sentiment: (*language.Sentiment)(nil),
+                },
+            },
+            Sentiment: (*language.Sentiment)(nil),
+        },
+        &language.Entity{
+            Name:     "North 500 West",
+            Type:     2,
+            Metadata: {"mid":"/g/1tghq1lm"},
+            Salience: 0.013983015902340412,
+            Mentions: {
+                &language.EntityMention{
+                    Text:      &language.TextSpan{Content:"North 500 West", BeginOffset:131},
+                    Type:      1,
+                    Sentiment: (*language.Sentiment)(nil),
+                },
+            },
+            Sentiment: (*language.Sentiment)(nil),
+        },
+    },
+    Language: "en",
+}

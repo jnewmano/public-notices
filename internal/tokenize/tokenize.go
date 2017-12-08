@@ -2,6 +2,7 @@ package tokenize
 
 import (
 	"bufio"
+	"context"
 	"io"
 	"strings"
 )
@@ -9,7 +10,7 @@ import (
 // Tokenize takes a reader and returns a string slice
 // Where each element in the string slice is a block of text
 // not separated by more than one new line.
-func Tokenize(r io.Reader) ([]string, error) {
+func Tokenize(ctx context.Context, r io.Reader) ([]string, error) {
 
 	b := bufio.NewReader(r)
 
