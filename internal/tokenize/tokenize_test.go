@@ -20,8 +20,6 @@ func TestTokenize(t *testing.T) {
 		t.Fatalf("unexpected number of tokens [%d]\n", len(tokens))
 	}
 
-	fmt.Printf("%#v\n", tokens)
-
 }
 
 const sampleText = `
@@ -34,4 +32,6 @@ This the the second
 sentence broken onto two lines.
 
 Final sentence.
+
+
 `
