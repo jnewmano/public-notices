@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"sync"
 
 	"github.com/jnewmano/public-notices/internal/download"
 )
@@ -13,7 +14,11 @@ import (
 type Processor func(context.Context, string, io.Reader) error
 
 type Checker struct {
+	lock sync.Mutex
+
 	Processors []Processor
+	lastTag    string
+	url        string
 }
 
 func New(processors ...Processor) (*Checker, error) {
@@ -25,6 +30,16 @@ func New(processors ...Processor) (*Checker, error) {
 }
 
 func (c *Checker) Do(ctx context.Context, url string, lastTag string) (string, error) {
+	c.lock.Lock()
+	defer c.lock.Unlock()
+
+	if lastTag == "" {
+		lastTag = c.lastTag
+	}
+
+	if url == "" {
+		url = c.url
+	}
 
 	fmt.Println("Checking document", url)
 	info, err := download.Head(ctx, url)
@@ -36,6 +51,7 @@ func (c *Checker) Do(ctx context.Context, url string, lastTag string) (string, e
 
 	// use etag to check to see if the remote file hasn't changed
 	if tag == lastTag {
+		fmt.Printf("Tag hasn't changed [%s] == [%s]\n", lastTag, tag)
 		return tag, nil
 	}
 
@@ -46,7 +62,7 @@ func (c *Checker) Do(ctx context.Context, url string, lastTag string) (string, e
 	}
 	defer r.Close()
 
-	name := url + "#" + tag
+	name := url + "_" + tag
 
 	fmt.Println("Running processors")
 	for i, v := range c.Processors {
@@ -64,5 +80,15 @@ func (c *Checker) Do(ctx context.Context, url string, lastTag string) (string, e
 		r = ioutil.NopCloser(buff)
 	}
 
+	c.SetLastTag(tag)
+
 	return tag, nil
+}
+
+func (c *Checker) SetLastTag(t string) {
+	c.lastTag = t
+}
+
+func (c *Checker) SetURL(u string) {
+	c.url = u
 }
