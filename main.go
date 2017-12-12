@@ -65,8 +65,10 @@ func main() {
 	ch.SetLastTag("<>")
 	ch.SetURL(url)
 
-	server.New(":8000", ch)
-
+	err = server.New(":8000", ch)
+	if err != nil {
+		exit("http server error", err)
+	}
 }
 
 func exit(msg string, err error) {

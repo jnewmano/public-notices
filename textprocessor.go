@@ -59,7 +59,7 @@ func (p *Processor) ProcessDocument(ctx context.Context, name string, r io.Reade
 			continue
 		}
 
-		fmt.Println("checking notice", v.Address)
+		fmt.Println("checking notice", v.Date, v.Address)
 		address := v.Address.Location + p.addressSuffix
 
 		l, err := p.l.AddressLocation(ctx, address)

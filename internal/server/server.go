@@ -12,7 +12,7 @@ type Server struct {
 	checker *checker.Checker
 }
 
-func New(addr string, checker *checker.Checker) {
+func New(addr string, checker *checker.Checker) error {
 
 	s := Server{
 		checker: checker,
@@ -24,7 +24,12 @@ func New(addr string, checker *checker.Checker) {
 	http.Handle("/", http.FileServer(http.Dir("./www")))
 
 	fmt.Println("Starting HTTP server on", addr)
-	http.ListenAndServe(addr, nil)
+	err := http.ListenAndServe(addr, nil)
+	if err != nil {
+		return err
+	}
+
+	return nil
 
 }
 

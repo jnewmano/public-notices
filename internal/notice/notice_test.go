@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"strings"
 	"testing"
+	"time"
 )
 
 func TestParseNotice(t *testing.T) {
@@ -24,5 +25,22 @@ func TestParseNotice(t *testing.T) {
 
 	if len(n) != 8 {
 		t.Fatalf("expected to find 8 notices, found %d\n", len(n))
+	}
+}
+
+func TestParseNoticeDate(t *testing.T) {
+
+	ctx := context.Background()
+
+	line := `On December 14th, 2017 at 7:00 p.m. at the  City Council Chambers located at 15 North 300 East, the
+ City Planning Commission will hold a public hearing to receive public comment on the following items:`
+
+	d, err := parseDate(ctx, line)
+	if err != nil {
+		t.Fatalf("unexpected error: %s\n", err)
+	}
+
+	if d.Day() != 14 || d.Month() != time.December || d.Year() != 2017 {
+		t.Fatalf("unexpected date: %s\n", d)
 	}
 }
