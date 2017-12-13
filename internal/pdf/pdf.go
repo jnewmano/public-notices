@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 )
 
-func ExtractText(ctx context.Context, name string, r io.Reader) (string, error) {
+func ExtractText(ctx context.Context, name string, version string, r io.Reader) (string, error) {
 
 	dir, err := ioutil.TempDir("", "pdftotext")
 	if err != nil {

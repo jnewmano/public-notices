@@ -11,7 +11,7 @@ import (
 	"github.com/jnewmano/public-notices/internal/download"
 )
 
-type Processor func(context.Context, string, io.Reader) error
+type Processor func(context.Context, string, string, io.Reader) error
 
 type Checker struct {
 	lock sync.Mutex
@@ -62,8 +62,6 @@ func (c *Checker) Do(ctx context.Context, url string, lastTag string) (string, e
 	}
 	defer r.Close()
 
-	name := url + "_" + tag
-
 	fmt.Println("Running processors")
 	for i, v := range c.Processors {
 		fmt.Println("Processor", i)
@@ -71,7 +69,7 @@ func (c *Checker) Do(ctx context.Context, url string, lastTag string) (string, e
 
 		r2 := io.TeeReader(r, buff)
 
-		err := v(ctx, name, r2)
+		err := v(ctx, url, tag, r2)
 		if err != nil {
 			// TODO: it's not great to abandon the entire pipeline if one stage fails
 			return "", fmt.Errorf("processor error [%d] [%s]", i, err)

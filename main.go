@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/jnewmano/public-notices/internal/checker"
+	"github.com/jnewmano/public-notices/internal/datastore"
 	"github.com/jnewmano/public-notices/internal/location"
 	"github.com/jnewmano/public-notices/internal/server"
 	"github.com/jnewmano/public-notices/internal/storage"
@@ -36,10 +37,21 @@ func main() {
 		exit("missing storage bucket name", fmt.Errorf("STORAGE_BUCKET not set"))
 	}
 
+	projectID := os.Getenv("PROJECT_ID")
+	if projectID == "" {
+		exit("missing project id", fmt.Errorf("PROJECT_ID not set"))
+	}
+
 	fmt.Println("Configuring storage client")
 	s, err := storage.New(ctx, storageBucket)
 	if err != nil {
 		exit("unable to setup storage client", err)
+	}
+
+	fmt.Println("Configuring datastore client")
+	d, err := datastore.New(ctx, projectID)
+	if err != nil {
+		exit("unable to setup datastore client", err)
 	}
 
 	fmt.Println("Configuring location client")
@@ -49,20 +61,29 @@ func main() {
 	}
 
 	fmt.Println("Configuring document processor")
-	p, err := New(addressSuffix, l)
+	p, err := New(addressSuffix, l, d)
 	if err != nil {
 		exit("unable to setup processor", err)
 	}
 
 	fmt.Println(s)
 	ch, err := checker.New(s.Write, p.ProcessDocument)
-	//ch, err := checker.New(p.ProcessDocument)
 	if err != nil {
 		exit("unable to setup web poller", err)
 	}
 
-	// TODO: load last tag from datastore
-	ch.SetLastTag("<>")
+	pm, err := p.loadFuturePublicMeetings(ctx)
+	if err != nil {
+		exit("unable to load known public meetings", err)
+	}
+
+	if len(pm) == 1 {
+		fmt.Println("Source:", pm[0].Source)
+		fmt.Println("Version:", pm[0].Version)
+		ch.SetLastTag(pm[0].Version)
+	}
+
+	// TODO: make sources more flexible (support both planning commission and city council)
 	ch.SetURL(url)
 
 	err = server.New(":8000", ch)

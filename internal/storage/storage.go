@@ -32,7 +32,9 @@ func New(ctx context.Context, bucket string) (*Storage, error) {
 	return &s, nil
 }
 
-func (s *Storage) Write(ctx context.Context, name string, f io.Reader) error {
+func (s *Storage) Write(ctx context.Context, source string, version string, f io.Reader) error {
+
+	name := source + "_" + version
 
 	name = url.PathEscape(name)
 
