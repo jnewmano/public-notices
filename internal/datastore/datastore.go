@@ -2,7 +2,6 @@ package datastore
 
 import (
 	"context"
-	"time"
 
 	"cloud.google.com/go/datastore"
 )
@@ -25,14 +24,17 @@ func New(ctx context.Context, projectID string) (*DataStore, error) {
 	return &d, nil
 }
 
-func (d *DataStore) Future(ctx context.Context, kind string, values interface{}) error {
+func (d *DataStore) Future(ctx context.Context, kind string, entity string, values interface{}) error {
 
 	q := datastore.NewQuery(kind)
 
-	filter := "Date >"
-	v := time.Now()
+	//	filter := "Date >"
+	//	v := time.Now()
 
-	q = q.Filter(filter, v)
+	//	q = q.Filter(filter, v)
+	q = q.Filter("Entity =", entity)
+	q = q.Order("-Date")
+	q = q.Limit(1)
 
 	_, err := d.client.GetAll(ctx, q, values)
 	if err != nil {

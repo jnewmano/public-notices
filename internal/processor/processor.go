@@ -1,4 +1,4 @@
-package main
+package processor
 
 import (
 	"bytes"
@@ -20,14 +20,18 @@ type Processor struct {
 	addressSuffix string
 	l             *location.LocationClient
 	d             *datastore.DataStore
+	entity        string
+
+	meeting PublicMeeting
 }
 
-func New(addressSuffix string, l *location.LocationClient, d *datastore.DataStore) (*Processor, error) {
+func New(addressSuffix string, l *location.LocationClient, d *datastore.DataStore, entity string) (*Processor, error) {
 
 	p := Processor{
 		addressSuffix: addressSuffix,
 		l:             l,
 		d:             d,
+		entity:        entity,
 	}
 
 	return &p, nil
@@ -52,6 +56,9 @@ type Notice struct {
 }
 
 func (p *Processor) ProcessDocument(ctx context.Context, source string, version string, r io.Reader) error {
+
+	entity := p.entity
+
 	fmt.Println("Processing document", source, version)
 	// extract text from the pdf
 	fmt.Println("extracting text")
@@ -109,8 +116,7 @@ func (p *Processor) ProcessDocument(ctx context.Context, source string, version 
 	}
 
 	m := PublicMeeting{
-		Entity: "Lehi, UT",
-		Body:   "Planning Commission",
+		Entity: entity,
 
 		Notices: ns,
 		Date:    date,
@@ -122,8 +128,11 @@ func (p *Processor) ProcessDocument(ctx context.Context, source string, version 
 	fmt.Println(m)
 
 	// push the public meeting to offline storage
-	key := "Lehi_PlanningCommission_" + m.Date.Format("2006-01-02")
+	key := entity + "_" + m.Date.Format("2006-01-02")
 	fmt.Println("Saving public meeting data to:", key)
+
+	// TODO: need a lock to update this
+	p.meeting = m
 
 	err = p.d.Put(ctx, storeType, key, &m)
 	if err != nil {
@@ -133,14 +142,24 @@ func (p *Processor) ProcessDocument(ctx context.Context, source string, version 
 	return nil
 }
 
-func (p *Processor) loadFuturePublicMeetings(ctx context.Context) ([]PublicMeeting, error) {
+func (p *Processor) LoadFuturePublicMeetings(ctx context.Context, entity string) ([]PublicMeeting, error) {
 
 	dst := []PublicMeeting{}
-	err := p.d.Future(ctx, storeType, &dst)
+	err := p.d.Future(ctx, storeType, entity, &dst)
 	if err != nil {
 		return nil, err
 	}
 
+	if len(dst) == 1 {
+		p.meeting = dst[0]
+	}
+
 	return dst, nil
 
+}
+
+func (p *Processor) Meeting(entity string) PublicMeeting {
+	// TODO: filter with the requested entity
+
+	return p.meeting
 }

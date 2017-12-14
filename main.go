@@ -10,12 +10,18 @@ import (
 	"github.com/jnewmano/public-notices/internal/checker"
 	"github.com/jnewmano/public-notices/internal/datastore"
 	"github.com/jnewmano/public-notices/internal/location"
+	"github.com/jnewmano/public-notices/internal/processor"
 	"github.com/jnewmano/public-notices/internal/server"
 	"github.com/jnewmano/public-notices/internal/storage"
 )
 
 func main() {
 	ctx := context.Background()
+
+	httpAddr := os.Getenv("HTTP_ADDR")
+	if httpAddr == "" {
+		httpAddr = ":80"
+	}
 
 	url := os.Getenv("TARGET_URL")
 	if url == "" {
@@ -42,6 +48,11 @@ func main() {
 		exit("missing project id", fmt.Errorf("PROJECT_ID not set"))
 	}
 
+	entity := os.Getenv("TARGET_ENTITY")
+	if entity == "" {
+		exit("no entity name provided", fmt.Errorf("TARGET_ENTITY not set"))
+	}
+
 	fmt.Println("Configuring storage client")
 	s, err := storage.New(ctx, storageBucket)
 	if err != nil {
@@ -61,7 +72,7 @@ func main() {
 	}
 
 	fmt.Println("Configuring document processor")
-	p, err := New(addressSuffix, l, d)
+	p, err := processor.New(addressSuffix, l, d, entity)
 	if err != nil {
 		exit("unable to setup processor", err)
 	}
@@ -72,10 +83,13 @@ func main() {
 		exit("unable to setup web poller", err)
 	}
 
-	pm, err := p.loadFuturePublicMeetings(ctx)
+	fmt.Println("loading future public meetings")
+	pm, err := p.LoadFuturePublicMeetings(ctx, entity)
 	if err != nil {
 		exit("unable to load known public meetings", err)
 	}
+
+	fmt.Println(pm)
 
 	if len(pm) == 1 {
 		fmt.Println("Source:", pm[0].Source)
@@ -86,7 +100,7 @@ func main() {
 	// TODO: make sources more flexible (support both planning commission and city council)
 	ch.SetURL(url)
 
-	err = server.New(":8000", ch)
+	err = server.New(httpAddr, ch, p)
 	if err != nil {
 		exit("http server error", err)
 	}

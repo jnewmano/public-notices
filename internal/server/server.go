@@ -6,16 +6,19 @@ import (
 	"net/http"
 
 	"github.com/jnewmano/public-notices/internal/checker"
+	"github.com/jnewmano/public-notices/internal/processor"
 )
 
 type Server struct {
-	checker *checker.Checker
+	checker   *checker.Checker
+	processor *processor.Processor
 }
 
-func New(addr string, checker *checker.Checker) error {
+func New(addr string, checker *checker.Checker, p *processor.Processor) error {
 
 	s := Server{
-		checker: checker,
+		checker:   checker,
+		processor: p,
 	}
 
 	http.HandleFunc("/checkTarget", s.CheckTargetHandler)
@@ -31,11 +34,6 @@ func New(addr string, checker *checker.Checker) error {
 
 	return nil
 
-}
-
-func (s *Server) UpcomingActionHandler(w http.ResponseWriter, r *http.Request) {
-	// returns a json object array with a list of upcoming
-	// planning commission agenda items
 }
 
 func (s *Server) CheckTargetHandler(w http.ResponseWriter, r *http.Request) {
