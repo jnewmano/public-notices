@@ -4,54 +4,58 @@ import (
 	"context"
 	"fmt"
 
-	"googlemaps.github.io/maps"
+	"github.com/jnewmano/public-notices/internal/location/locationbing"
+	"github.com/jnewmano/public-notices/internal/location/locationgoogle"
+	"github.com/jnewmano/public-notices/internal/location/locationtypes"
 )
 
-type Location struct {
-	Latitude  float64
-	Longitude float64
+type LocationProvider interface {
+	AddressLocation(context.Context, string) (*locationtypes.Location, error)
 }
 
 type LocationClient struct {
-	c *maps.Client
+	google LocationProvider
+	bing   LocationProvider
 }
 
-func New(ctx context.Context, key string) (*LocationClient, error) {
+func New(ctx context.Context, googleAPIKey string, bingAPIKey string) (*LocationClient, error) {
 
-	c, err := maps.NewClient(maps.WithAPIKey(key))
+	g, err := locationgoogle.New(ctx, googleAPIKey)
+	if err != nil {
+		return nil, err
+	}
+
+	b, err := locationbing.New(ctx, bingAPIKey)
 	if err != nil {
 		return nil, err
 	}
 
 	l := LocationClient{
-		c: c,
+		google: g,
+		bing:   b,
 	}
 
 	return &l, nil
 }
 
-func (l *LocationClient) AddressLocation(ctx context.Context, a string) (*Location, error) {
+func (l *LocationClient) AddressLocation(ctx context.Context, a string) (*locationtypes.Location, error) {
 
-	r := maps.GeocodingRequest{
-		Address: a,
+	// try to lookup location first with google
+	location, err := l.google.AddressLocation(ctx, a)
+	if err == nil {
+		return location, nil
 	}
 
-	resp, err := l.c.Geocode(ctx, &r)
-	if err != nil {
-		return nil, fmt.Errorf("unable to get geocode information: %s\n", err)
+	fmt.Printf("Unable to lookup location with google, trying bing: [%s]\n", err)
+
+	// if that fails, then try bing
+	location, err = l.bing.AddressLocation(ctx, a)
+	if err == nil {
+		return location, nil
 	}
 
-	if len(resp) != 1 {
-		return nil, fmt.Errorf("expected one result, got [%d]", len(resp))
-	}
+	fmt.Printf("Unable to lookup location with bing: [%s]\n", err)
 
-	ll := resp[0].Geometry.Location
-
-	loc := Location{
-		Latitude:  ll.Lat,
-		Longitude: ll.Lng,
-	}
-
-	return &loc, nil
+	return nil, err
 
 }

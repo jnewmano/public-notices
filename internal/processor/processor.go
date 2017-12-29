@@ -5,10 +5,12 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"strings"
 	"time"
 
 	"github.com/jnewmano/public-notices/internal/datastore"
 	"github.com/jnewmano/public-notices/internal/location"
+	"github.com/jnewmano/public-notices/internal/location/locationtypes"
 	"github.com/jnewmano/public-notices/internal/notice"
 	"github.com/jnewmano/public-notices/internal/pdf"
 	"github.com/jnewmano/public-notices/internal/tokenize"
@@ -52,7 +54,7 @@ type PublicMeeting struct {
 
 type Notice struct {
 	Notice   notice.Notice
-	Location *location.Location
+	Location *locationtypes.Location
 }
 
 func (p *Processor) ProcessDocument(ctx context.Context, source string, version string, r io.Reader) error {
@@ -99,7 +101,7 @@ func (p *Processor) ProcessDocument(ctx context.Context, source string, version 
 		}
 
 		fmt.Println("checking notice", v.Date, v.Address)
-		address := v.Address.Location + p.addressSuffix
+		address := strings.TrimSpace(v.Address.Location + " " + p.addressSuffix)
 
 		l, err := p.l.AddressLocation(ctx, address)
 		if err != nil {

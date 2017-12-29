@@ -28,13 +28,18 @@ func main() {
 		exit("missing target URL", fmt.Errorf("TARGET_URL not set"))
 	}
 
-	mapsAPIKey := os.Getenv("MAPS_API_KEY")
-	if mapsAPIKey == "" {
-		exit("missing maps credentials", fmt.Errorf("MAPS_API_KEY not set"))
+	googleMapsAPIKey := os.Getenv("GOOGLE_MAPS_API_KEY")
+	if googleMapsAPIKey == "" {
+		exit("missing maps credentials", fmt.Errorf("GOOGLE_MAPS_API_KEY not set"))
+	}
+
+	bingMapsAPIKey := os.Getenv("BING_MAPS_API_KEY")
+	if bingMapsAPIKey == "" {
+		exit("missing maps credentials", fmt.Errorf("BING_MAPS_API_KEY not set"))
 	}
 
 	addressSuffix := os.Getenv("ADDRESS_SUFFIX")
-	if mapsAPIKey == "" {
+	if addressSuffix == "" {
 		exit("missing address suffix", fmt.Errorf("ADDRESS_SUFFIX not set"))
 	}
 
@@ -66,7 +71,7 @@ func main() {
 	}
 
 	fmt.Println("Configuring location client")
-	l, err := location.New(ctx, mapsAPIKey)
+	l, err := location.New(ctx, googleMapsAPIKey, bingMapsAPIKey)
 	if err != nil {
 		exit("unable to setup location client", err)
 	}
